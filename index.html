@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BIMNet: Dataset and benchmark for as-built BIM reconstruction from real-world point cloud</title>
+    <link rel="stylesheet" href="styles.css">
+
+</head>
+<body>
+    <header>
+        <h1>BIMNet: Dataset and benchmark for as-built BIM reconstruction from real-world point cloud</h1>
+        <h2>CBIMS research group, School of software, Tsinghua University</h2>
+    </header>
+    <br>
+    
+    <section id="abstract">
+        <h3>Abstract</h3>
+        <p>Building Information Modeling (BIM) contains extensive geometric and semantic information, serving as an essential bridge between the real and digital worlds. Currently, scan-to-BIM is widely applied in practical engineering projects for as-built BIM reconstruction. Developments in automation methods have reduced the difficulty of scan-to-BIM, significantly improving reconstruction efficiency and saving in labor and costs. However, due to the lack of unified datasets and benchmarks, these methods focus on optimizing different metrics within their respective datasets. Since mainstream approaches have begun to embrace deep learning, these scattered datasets fail to meet the requirements for complex architectural data comprehension. The absence of standardized evaluation metrics also hinders the comparison between methods, thereby impeding progress in the field. To address data issues and standardize the scan-to-BIM benchmark, we propose BIMNet for as-built BIM reconstruction. Our BIMNet comprises 25 high-quality scans from various building types, along with corresponding IFC-based point cloud semantics and BIM models. We have also designed geometric metrics to evaluate the geometric accuracy of reconstruction models at the construction level and topological metrics to assess the spatial connectivity correctness of these models. Experimental results demonstrate that the BIMNet dataset serves as a valuable benchmark for evaluating existing methods. Our IFC-based semantic design and refinement assist deep learning-based point cloud semantic segmentation algorithms in learning AEC (Architecture, Engineering, and Construction) domain-specific knowledge. Furthermore, our geometric and topological metrics not only quantify the reconstruction quality from different perspectives but also help accurately identify issues in individual components and spatial connectivity through visualization.</p>
+    </section>
+
+    <br>
+
+    <section id="resources">
+        <h3>Resources (Coming Soon)</h3>
+        <div class="icons">
+            <div class="icon">
+                <img src="images/github-fill.png" alt="Code">
+                <p>Code</p>
+            </div>
+            <div class="icon">
+                <img src="images/paper.png" alt="Dataset">
+                <p>Paper</p>
+            </div>
+            <div class="icon">
+                <img src="images/数据集.png" alt="Dataset">
+                <p>Dataset</p>
+            </div>
+            <div class="icon">
+                <img src="images/benchmark.png" alt="Dataset">
+                <p>Benchmark</p>
+            </div>
+
+        </div>
+    </section>
+    <br>
+    <section id="viewer">
+        <h3>Interactive Viewer</h3>
+        <div>
+            <label for="modelSelect">Select Model Pair:</label>
+            <select id="modelSelect">
+                <option value="pair1">Pair 1</option>
+                <option value="pair2">Pair 2</option>
+                <!-- Add more options as needed -->
+            </select>
+        </div>
+        <div>
+            <input type="checkbox" id="showPointCloud" checked>
+            <label for="showPointCloud">Show Point Cloud</label>
+            <input type="checkbox" id="showOBJ" checked>
+            <label for="showOBJ">Show OBJ</label>
+        </div>
+        <div id="viewerContainer"></div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/OBJLoader.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/PCDLoader.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+        <script src="script.js"></script>
+    </section>
+    <br>
+    <br>
+    <br>
+    <section id="contact">
+        <h3>Contact</h3>
+        <p>Copyright © CBIMS Research Group. All rights reserved.</p> 
+    </section>
+</body>
+</html>
