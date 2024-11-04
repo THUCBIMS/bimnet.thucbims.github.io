@@ -1,178 +1,166 @@
-// Basic Three.js setup
-const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-const renderer = new THREE.WebGLRenderer();
-renderer.setSize(window.innerWidth, window.innerHeight);
-renderer.setClearColor(0xffffff); // 设置背景颜色为白色
-
-// 获取 viewer 容器并将 canvas 添加进去
-const viewer = document.getElementById('viewer');
-viewer.appendChild(renderer.domElement);
-// document.body.appendChild(renderer.domElement);
-
-// 设置 renderer 的大小为容器的大小
-function resizeRenderer() {
-    const width = viewer.clientWidth;
-    const height = viewer.clientHeight;
-    renderer.setSize(width, height);
-    camera.aspect = width / height;
-    camera.updateProjectionMatrix();
-}
-resizeRenderer(); // 初始化时设置大小
-
-// Lights
-const ambientLight = new THREE.AmbientLight(0x404040); // Soft white light
-scene.add(ambientLight);
-const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
-scene.add(directionalLight);
-
-// Controls
-const controls = new THREE.OrbitControls(camera, renderer.domElement);
-
-// // Load point cloud data from a txt file
-// fetch('point.txt')
-//     .then(response => response.text())
-//     .then(data => {
-//         const points = parsePointCloudData(data);
-//         scene.add(points);
-//     })
-//     .catch(error => {
-//         console.error('An error occurred loading the point cloud file:', error);
+// document.getElementById('playButton').addEventListener('click', function() {
+//     const videos = document.querySelectorAll('video');
+//     videos.forEach(video => {
+//         video.play();
 //     });
-
-// // Load OBJ file
-// const objLoader = new THREE.OBJLoader();
-// objLoader.load('usr.obj', function (object) {
-//     scene.add(object);
-//     object.position.set(0, 0, 0);
-//     object.scale.set(1, 1, 1);
-// }, undefined, function (error) {
-//     console.error('An error occurred loading the OBJ file:', error);
 // });
 
-// // Function to parse point cloud data
-// function parsePointCloudData(data) {
-//     const lines = data.split('\n');
-//     const geometry = new THREE.BufferGeometry();
-//     const positions = [];
-//     const colors = [];
+// document.addEventListener('DOMContentLoaded', function() {
 
-//     lines.forEach(line => {
-//         if (line.trim().length > 0) {
-//             const [x, y, z, r, g, b] = line.split(' ').map(Number);
-//             positions.push(x, y, z);
-//             colors.push(r / 255, g / 255, b / 255); // Normalize colors to [0, 1]
-//         }
+//     const video1 = document.getElementById('video1');
+//     const video2 = document.getElementById('video2');
+//     const video3 = document.getElementById('video3');
+//     const slider1 = document.getElementById('slider1');
+//     const slider2 = document.getElementById('slider2');
+//     const videoContainer = document.getElementById('video-compare-container');
+//     const videoContainer1 = document.getElementById('video-container1');
+//     const videoContainer2 = document.getElementById('video-container2');
+//     const videoContainer3 = document.getElementById('video-container3');
+
+
+
+//     // Sync the play/pause state of all videos
+//     video1.addEventListener('play', () => { video2.play(); video3.play(); });
+//     video1.addEventListener('pause', () => { video2.pause(); video3.pause(); });
+//     video2.addEventListener('play', () => { video1.play(); video3.play(); });
+//     video2.addEventListener('pause', () => { video1.pause(); video3.pause(); });
+//     video3.addEventListener('play', () => { video1.play(); video2.play(); });
+//     video3.addEventListener('pause', () => { video1.pause(); video2.pause(); });
+
+//     let isDragging1 = false;
+//     let isDragging2 = false;
+
+//     slider1.addEventListener('mousedown', function(e) {
+//         isDragging1 = true;
+//         document.body.style.cursor = 'ew-resize';
 //     });
 
-//     geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
-//     geometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
+//     slider2.addEventListener('mousedown', function(e) {
+//         isDragging2 = true;
+//         document.body.style.cursor = 'ew-resize';
+//     });
 
-//     const material = new THREE.PointsMaterial({ size: 0.05, vertexColors: true });
-//     return new THREE.Points(geometry, material);
-// }
+//     document.addEventListener('mouseup', function(e) {
+//         isDragging1 = false;
+//         isDragging2 = false;
+//         document.body.style.cursor = 'default';
+//     });
 
-// // // Camera position
-// camera.position.z = 5;
+//     document.addEventListener('mousemove', function(e) {
+//         if (isDragging1 || isDragging2) {
+//             const rect = videoContainer.getBoundingClientRect();
+//             let offsetX = e.clientX - rect.left;
 
-// 自动旋转标志
-let autoRotate = true;
-let timeoutId;
+//             if (offsetX < 0) offsetX = 0;
+//             if (offsetX > rect.width) offsetX = rect.width;
 
-// 监听 OrbitControls 的交互事件
-controls.addEventListener('start', () => {
-    autoRotate = false; // 停止自动旋转
-    if (timeoutId) {
-        clearTimeout(timeoutId); // 清除之前的计时器
-    }
-});
+//             const percentage = offsetX / rect.width * 100;
 
-controls.addEventListener('end', () => {
-    timeoutId = setTimeout(() => {
-        autoRotate = true; // 重新开始自动旋转
-    }, 2000); // 3秒后重新开始自动旋转
-});
+//             if (isDragging1) {
+//                 slider1.style.left = `${percentage}%`;
+//                 videoContainer1.style.clipPath = `inset(0 ${100 - percentage}% 0 0)`;
+//                 videoContainer2.style.clipPath = `inset(0 0 0 ${percentage}%)`;
+//             }
 
-
-// 加载点云和OBJ文件的函数
-const loaders = {
-    point: new THREE.PCDLoader(),
-    obj: new THREE.OBJLoader()
-};
-
-const models = {
-    pair1: { point: 'point.pcd', obj: 'usr.obj' },
-    pair2: { point: 'point2.pcd', obj: 'model2.obj' }
-    // Add more pairs as needed
-};
-
-let currentPointCloud = null;
-let currentOBJ = null;
-
-function loadModelPair(pair) {
-    if (currentPointCloud) {
-        scene.remove(currentPointCloud);
-    }
-    if (currentOBJ) {
-        scene.remove(currentOBJ);
-    }
-
-    const { point, obj } = models[pair];
-
-    loaders.point.load(point, (points) => {
-        currentPointCloud = points;
-        updateVisibility();
-        scene.add(points);
-    });
-
-    loaders.obj.load(obj, (object) => {
-        currentOBJ = object;
-        updateVisibility();
-        scene.add(object);
-    });
-}
-
-function updateVisibility() {
-    if (currentPointCloud) {
-        currentPointCloud.visible = document.getElementById('showPointCloud').checked;
-    }
-    if (currentOBJ) {
-        currentOBJ.visible = document.getElementById('showOBJ').checked;
-    }
-}
-
-// 监听选择列表和复选框的变化
-document.getElementById('modelSelect').addEventListener('change', (event) => {
-    loadModelPair(event.target.value);
-});
-
-document.getElementById('showPointCloud').addEventListener('change', updateVisibility);
-document.getElementById('showOBJ').addEventListener('change', updateVisibility);
-
-// 初始加载第一个模型对
-loadModelPair('pair1');
-
-// Camera position
-camera.position.z = 5;
+//             if (isDragging2) {
+//                 slider2.style.left = `${percentage}%`;
+//                 videoContainer2.style.clipPath = `inset(0 0 0 ${parseFloat(slider1.style.left)}%)`;
+//                 videoContainer3.style.clipPath = `inset(0 0 0 ${percentage}%)`;
+//             }
+//         }
+//     });
+// });
 
 
-// Render loop
-function animate() {
-    requestAnimationFrame(animate);
 
-    if (autoRotate) {
-        // 自动旋转场景中的所有物体
-        scene.children.forEach(child => {
-            child.rotation.y += 0.003; // 以每帧0.01弧度的速度旋转
+
+document.addEventListener('DOMContentLoaded', function() {
+    const videoContainers = [
+        document.getElementById('video1'),
+        document.getElementById('video2'),
+        document.getElementById('video3')
+    ];
+
+    const videoSources = {
+        instance1: ['video/1-3.mp4', 'video/1-2.mp4', 'video/1-1.mp4'],
+        instance2: ['video/2-3.mp4', 'video/2-2.mp4', 'video/2-1.mp4'],
+        instance3: ['video/3-3.mp4', 'video/3-2.mp4', 'video/3-1.mp4']
+    };
+
+    const tabButtons = document.querySelectorAll('.tab-button');
+
+    tabButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const targetId = this.getAttribute('data-tab');
+
+            // Remove active class from all buttons
+            tabButtons.forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Add active class to the clicked button
+            this.classList.add('active');
+
+            // Update video sources
+            videoContainers.forEach((video, index) => {
+                video.pause();
+                video.querySelector('source').src = videoSources[targetId][index];
+                video.load();
+                video.play();
+            });
         });
-    }
+    });
 
-    controls.update(); // Only if using controls
-    renderer.render(scene, camera);
-}
-animate();
+    // Initialize the first tab as active
+    tabButtons[0].click();
 
-// Handle window resize
-window.addEventListener('resize', () => {
-    resizeRenderer();
+    const sliders = document.querySelectorAll('.slider');
+    sliders.forEach(slider => {
+        let isDragging = false;
+
+        slider.addEventListener('mousedown', function() {
+            isDragging = true;
+            document.body.style.cursor = 'ew-resize';
+        });
+
+        document.addEventListener('mouseup', function() {
+            isDragging = false;
+            document.body.style.cursor = 'default';
+        });
+
+        document.addEventListener('mousemove', function(e) {
+            if (isDragging) {
+                const videoContainer = slider.closest('#video-compare-container');
+                const rect = videoContainer.getBoundingClientRect();
+                let offsetX = e.clientX - rect.left;
+
+                if (offsetX < 0) offsetX = 0;
+                if (offsetX > rect.width) offsetX = rect.width;
+
+                const percentage = offsetX / rect.width * 100;
+                
+                const slider1 = document.getElementById('slider1');
+                const slider2 = document.getElementById('slider2');
+                var slider1Percentage = parseFloat(slider1.style.left);
+                var slider2Percentage = parseFloat(slider2.style.left);
+                
+                if (isNaN(slider2Percentage)){slider2Percentage= 66;}
+                if (isNaN(slider1Percentage)){slider1Percentage= 33;}
+                console.log("s1: ", slider1Percentage, "s2: ", slider2Percentage);
+
+                if (slider.id === 'slider1' && percentage < slider2Percentage - 3) {
+                    slider.style.left = `${percentage}%`;
+                    videoContainer.querySelector('#video-container1').style.clipPath = `inset(0 ${100 - percentage}% 0 0`;
+                    videoContainer.querySelector('#video-container2').style.clipPath = `inset(0 0 0 ${percentage}%)`;
+                }
+
+                if (slider.id === 'slider2' && percentage > slider1Percentage + 3) {
+                    slider.style.left = `${percentage}%`;
+                    videoContainer.querySelector('#video-container2').style.clipPath = `inset(0 0 0 ${parseFloat(slider.previousElementSibling.style.left)}%)`;
+                    videoContainer.querySelector('#video-container3').style.clipPath = `inset(0 0 0 ${percentage}%)`;
+                }
+            }
+        });
+    });
 });
+

@@ -1,0 +1,225 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    /* background-color: #f4f4f4; */
+}
+
+header {
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2em;
+}
+
+header h2 {
+    margin: 0;
+    font-size: 1.2em;
+    font-weight: normal;
+}
+
+#abstract {
+    text-align: center;
+}
+
+#abstract p {
+    display: inline-block; /* 使段落成为行内块元素 */
+    width: 50%; /* 设置文本的宽度 */
+    margin: 0 auto; /* 自动设置左右边距以居中 */
+    text-align: justify;
+}
+
+#contact {
+    text-align: center;
+}
+
+#resources h3 {
+    text-align: center;
+}
+
+#viewer h3 {
+    text-align: center;
+}
+
+#resources .icons {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+}
+
+#resources .icon {
+    text-align: center;
+}
+
+#resources .icon img {
+    width: 35px;
+    height: 35px;
+}
+
+#viewer {
+    width: 50%; /* 设置 viewer 部分的宽度为网页宽度的 60% */
+    height: 60vh;
+    margin: 0 auto; /* 自动设置左右边距以居中 */
+    align-self: center;
+}
+
+#viewer canvas {
+    width: 100%; /* 确保 canvas 占满父容器 */
+    height: auto; /* 保持 canvas 的宽高比 */
+}
+
+.video-container1 {
+    display: flex;
+    justify-content: space-between;
+    width: 60%;
+    margin: 0 auto;
+}
+
+.video-item {
+    flex: 1;
+    margin: 0 5px;
+}
+
+video {
+    width: 100%;
+    height: auto;
+}
+
+.caption {
+    text-align: center;
+    margin-top: 5px;
+}
+
+.controls {
+    text-align: center;
+    margin-top: 20px;
+}
+
+#video-compare-container {
+    display: inline-block;
+    line-height: 0;
+    position: relative;
+    width: 60%;
+    height: auto;
+    padding-top: 42.3%;
+}
+
+.video-container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    overflow: hidden;
+}
+
+#video-container1 {
+    clip-path: inset(0 0 0 0);
+}
+
+#video-container2 {
+    clip-path: inset(0 0 0 33.33%);
+}
+
+#video-container3 {
+    clip-path: inset(0 0 0 67%);
+}
+
+#video-compare-container video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.slider {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 7px; /* 增加宽度 */
+    background-color: rgba(0, 0, 0, 0.3); /* 改变颜色 */
+    cursor: ew-resize;
+    z-index: 10;
+    /* border: 2px solid #fff; 添加边框 */
+}
+
+.slider::before {
+    content: '';
+    position: absolute;
+    top: 3%;
+    left: -18px; /* 紧贴滑块右侧 */
+    transform: translateY(-50%);
+    width: 16px; /* 图标宽度 */
+    height: 16px; /* 图标高度 */
+    background: url('image/left.png') no-repeat center center;
+    background-size: contain; /* 确保图标适应容器 */
+}
+
+.slider::after {
+    content: '';
+    position: absolute;
+    top: 3%;
+    left: 10px; /* 紧贴滑块右侧 */
+    transform: translateY(-50%);
+    width: 16px; /* 图标宽度 */
+    height: 16px; /* 图标高度 */
+    background: url('image/right.png') no-repeat center center;
+    background-size: contain; /* 确保图标适应容器 */
+}
+
+#slider1 {
+    left: 33%;
+}
+
+#slider2 {
+    left: 66.66%;
+}
+
+
+
+#tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.tab-button {
+    background-color: #4CAF50; /* 绿色背景 */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 0 5px; /* 增加按钮之间的间距 */
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s;
+    border-radius: 5px; /* 圆角 */
+    font-size: 16px; /* 字体大小 */
+    font-weight: bold; /* 字体加粗 */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 阴影 */
+}
+
+.tab-button:hover {
+    background-color: #45a049; /* 鼠标悬停时的背景颜色 */
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2); /* 鼠标悬停时的阴影 */
+    transform: translateY(-2px); /* 鼠标悬停时的轻微上移效果 */
+}
+
+.tab-button.active {
+    background-color: #3e8e41; /* 激活状态的背景颜色 */
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2); /* 激活状态的阴影 */
+}
+
+.captions {
+    /* color: #333; */
+    font-weight: bold;
+    font-size: 1em;
+}
+.video-group {
+    display: none;
+}
+
+.video-group.active {
+    display: block;
+}
