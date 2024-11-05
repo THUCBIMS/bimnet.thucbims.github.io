@@ -14,6 +14,45 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const tabButtons = document.querySelectorAll('.tab-button');
 
+    // function getNetworkSpeed() {
+    //     const fileUrl = 'https://speed.hetzner.de/1MB.bin'; // 替换为实际的测试文件URL
+    //     const fileSizeInBytes = 10 * 1024 * 1024; // 替换为实际的测试文件大小（例如10MB）
+    
+    //     return new Promise((resolve, reject) => {
+    //         const startTime = new Date().getTime();
+    //         const xhr = new XMLHttpRequest();
+    
+    //         xhr.open('GET', fileUrl, true);
+    //         xhr.responseType = 'blob';
+    
+    //         xhr.onload = function() {
+    //             if (xhr.status === 200) {
+    //                 const endTime = new Date().getTime();
+    //                 const durationInSeconds = (endTime - startTime) / 1000;
+    //                 const fileSizeInMB = fileSizeInBytes / (1024 * 1024);
+    //                 const speedInMBps = fileSizeInMB / durationInSeconds;
+    //                 resolve(speedInMBps);
+    //             } else {
+    //                 reject(`Failed to download file: ${xhr.status}`);
+    //             }
+    //         };
+    
+    //         xhr.onerror = function() {
+    //             reject('Network error occurred while downloading the file.');
+    //         };
+    
+    //         xhr.send();
+    //     });
+    // }
+    
+    // // 使用示例
+    // getNetworkSpeed().then(speedInMBps => {
+    //     console.log(`Download speed: ${speedInMBps.toFixed(2)} MB/s`);
+    // }).catch(error => {
+    //     console.error(error);
+    // });
+
+    
     tabButtons.forEach(button => {
         button.addEventListener('click', function() {
             const targetId = this.getAttribute('data-tab');
@@ -32,17 +71,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 video.pause();
                 video.querySelector('source').src = videoSources[targetId][index];
                 video.load();
+            
 
-                // video.onloadeddata = function() {
-                //     loadedCount++;
-                //     console.log(loadedCount);
-                //     if (loadedCount === videoContainers.length) {
-                //         videoContainers.forEach(v => v.play());
-                //     }
-                // };
-                setTimeout(() => {
-                    video.play();
-                }, 10000);
+                video.oncanplaythrough = function() {
+                    loadedCount++;
+                    console.log(loadedCount);
+                    if (loadedCount === videoContainers.length) {
+                        videoContainers.forEach(v => v.play());
+                    }
+                };
+                // setTimeout(() => {
+                //     video.play();
+                // }, 10000);
                 // video.play();
             });
         });
