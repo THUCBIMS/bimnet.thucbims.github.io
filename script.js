@@ -33,14 +33,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 video.querySelector('source').src = videoSources[targetId][index];
                 video.load();
 
-                video.onloadeddata = function() {
-                    loadedCount++;
-                    console.log(loadedCount);
-                    if (loadedCount === videoContainers.length) {
-                        videoContainers.forEach(v => v.play());
-                    }
-                };
-
+                // video.onloadeddata = function() {
+                //     loadedCount++;
+                //     console.log(loadedCount);
+                //     if (loadedCount === videoContainers.length) {
+                //         videoContainers.forEach(v => v.play());
+                //     }
+                // };
+                setTimeout(() => {
+                    video.play();
+                }, 10000);
                 // video.play();
             });
         });
