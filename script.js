@@ -35,6 +35,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 video.onloadeddata = function() {
                     loadedCount++;
+                    console.log(loadedCount);
                     if (loadedCount === videoContainers.length) {
                         videoContainers.forEach(v => v.play());
                     }
