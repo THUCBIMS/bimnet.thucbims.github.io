@@ -77,7 +77,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     loadedCount++;
                     console.log(loadedCount);
                     if (loadedCount === videoContainers.length) {
-                        videoContainers.forEach(v => v.play());
+                        setTimeout(() => {
+                            videoContainers.forEach(v => v.play());
+                        }, 10000); // Adjust the delay time as needed
+                        // videoContainers.forEach(v => v.play());
                     }
                 };
                 // setTimeout(() => {
