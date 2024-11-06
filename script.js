@@ -33,18 +33,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 video.pause();
                 video.querySelector('source').src = videoSources[targetId][index];
                 video.load();
-                // video.play();
+                video.play();
 
-                video.loadedmetadata = function() {
-                    loadedCount++;
-                    console.log(loadedCount);
-                    if (loadedCount === videoContainers.length) {
-                        setTimeout(() => {
-                            videoContainers.forEach(v => v.play());
-                        }, 1000); // Adjust the delay time as needed
-                        // videoContainers.forEach(v => v.play());
-                    }
-                };
+                // video.loadedmetadata = function() {
+                //     loadedCount++;
+                //     console.log(loadedCount);
+                //     if (loadedCount === videoContainers.length) {
+                //         setTimeout(() => {
+                //             videoContainers.forEach(v => v.play());
+                //         }, 1000); // Adjust the delay time as needed
+                //         // videoContainers.forEach(v => v.play());
+                //     }
+                // };
 
             });
 
