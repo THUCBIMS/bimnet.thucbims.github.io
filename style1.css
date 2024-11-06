@@ -32,6 +32,7 @@ header h2 {
     width: 50%; /* 设置文本的宽度 */
     margin: 0 auto; /* 自动设置左右边距以居中 */
     text-align: justify;
+    text-indent:2em;
 }
 
 #contact {
@@ -42,9 +43,7 @@ header h2 {
     text-align: center;
 }
 
-#viewer h3 {
-    text-align: center;
-}
+
 
 #resources .icons {
     display: flex;
@@ -61,16 +60,15 @@ header h2 {
     height: 35px;
 }
 
-#viewer {
-    width: 50%; /* 设置 viewer 部分的宽度为网页宽度的 60% */
-    height: 60vh;
-    margin: 0 auto; /* 自动设置左右边距以居中 */
-    align-self: center;
+#viewer{
+    text-align: center;
 }
-
-#viewer canvas {
-    width: 100%; /* 确保 canvas 占满父容器 */
-    height: auto; /* 保持 canvas 的宽高比 */
+#viewer p{
+    display: inline-block; /* 使段落成为行内块元素 */
+    width: 50%; /* 设置文本的宽度 */
+    margin: 0 auto; /* 自动设置左右边距以居中 */
+    text-align: justify;
+    text-indent:2em;
 }
 
 .video-container1 {
