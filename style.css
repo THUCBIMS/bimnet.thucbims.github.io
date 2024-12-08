@@ -2,13 +2,16 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+    width: 80%;
+    margin: 0 auto;
+    max-width: 1000px;
     /* background-color: #f4f4f4; */
 }
 
 header {
-    background-color: #333;
-    color: white;
-    padding: 20px;
+    /* background-color: #333; */
+    /* color: white; */
+    padding: 50px;
     text-align: center;
 }
 
@@ -29,10 +32,10 @@ header h2 {
 
 #abstract p {
     display: inline-block; /* 使段落成为行内块元素 */
-    width: 50%; /* 设置文本的宽度 */
+    /* width: 60%; 设置文本的宽度 */
     margin: 0 auto; /* 自动设置左右边距以居中 */
     text-align: justify;
-    text-indent:2em;
+    /* text-indent:2em; */
 }
 
 #contact {
@@ -41,7 +44,7 @@ header h2 {
 
 #resources h3 {
     text-align: center;
-}
+} 
 
 
 
@@ -65,10 +68,10 @@ header h2 {
 }
 #viewer p{
     display: inline-block; /* 使段落成为行内块元素 */
-    width: 50%; /* 设置文本的宽度 */
+    /* width: 60%;  */
     margin: 0 auto; /* 自动设置左右边距以居中 */
     text-align: justify;
-    text-indent:2em;
+    /* text-indent:2em; */
 }
 
 .video-container1 {
@@ -102,9 +105,9 @@ video {
     display: inline-block;
     line-height: 0;
     position: relative;
-    width: 60%;
+    width: 80%;
     /* height: auto; */
-    padding-top: 33.5%;
+    padding-top: 45%;
 }
 
 .video-container {
