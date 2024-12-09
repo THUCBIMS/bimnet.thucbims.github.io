@@ -22,41 +22,19 @@
         <p>Building Information Modeling (BIM) contains extensive geometric and semantic information, serving as an essential bridge between the real and digital worlds. Currently, scan-to-BIM is widely applied in practical engineering projects for as-built BIM reconstruction. Developments in automation methods have reduced the difficulty of scan-to-BIM, significantly improving reconstruction efficiency and saving in labor and costs. However, due to the lack of unified datasets and benchmarks, these methods focus on optimizing different metrics within their respective datasets. Since mainstream approaches have begun to embrace deep learning, these scattered datasets fail to meet the requirements for complex architectural data comprehension. The absence of standardized evaluation metrics also hinders the comparison between methods, thereby impeding progress in the field. To address data issues and standardize the scan-to-BIM benchmark, we propose BIMNet for as-built BIM reconstruction. Our BIMNet comprises 25 high-quality scans from various building types, along with corresponding IFC-based point cloud semantics and BIM models. We have also designed geometric metrics to evaluate the geometric accuracy of reconstruction models at the component level and topological metrics to assess the spatial connectivity correctness of these models. Experimental results demonstrate that the BIMNet dataset serves as a valuable benchmark for evaluating existing methods. Our IFC-based semantic design and refinement assist deep learning-based point cloud semantic segmentation algorithms in learning AEC (Architecture, Engineering, and Construction) domain-specific knowledge. Furthermore, our geometric and topological metrics not only quantify the reconstruction quality from different perspectives but also help accurately identify issues in individual components and spatial connectivity through visualization.</p>
     </section>
 
-    <br>
 
     <section id="resources">
-        <h3>Resources (Coming Soon)</h3>
-        <div class="icons">
-            <div class="icon">
-                <img src="image/github-fill.png" alt="Code">
-                <p>Code</p>
-            </div>
-            <div class="icon">
-                <img src="image/paper.png" alt="Dataset">
-                <p>Paper</p>
-            </div>
-            <div class="icon">
-                <img src="image/数据集.png" alt="Dataset">
-                <p>Dataset</p>
-            </div>
-            <div class="icon">
-                <img src="image/benchmark.png" alt="Dataset">
-                <p>Benchmark</p>
-            </div>
-
-        </div>
+        <!-- <h3>Paper (Coming Soon)</h3> -->
+        <h3>Dataset and Code (Coming Soon)</h3>
+        <p>Please check the <a href="">git repository</a> for a detailed introduction to the BIMNet dataset, benchmark and related tools.</p>
     </section>
-    <br>
 
     <section id="viewer">
-        <h3 style="text-align: center;">Interactive viewer</h3>
+        <h3>Interactive viewer</h3>
         <p>We provide three interactive BIMNet data instances here. You can use two sliders to view data from the three modalities. For better visualization, we have removed the roof of the BIM model.</p>
-        <br>
-        <br>
         <p>If the positions of the three modalities are not synchronized or if there is any lag, it may be because the instances have not fully loaded yet (~60MB for each instance). Please wait for a while and then switch between the instance tabs, which will prompt the synchronization of the different modalities.</p>
     </section>
     <br>
-
 
     <div id="tabs">
         <button class="tab-button" data-tab="instance1">Instance 1</button>
@@ -92,16 +70,17 @@
         <p class='captions' style="width: 25%;">Dedicated BIM model</p>
     </div>
 
-    <br>
-    <br>
-    <br>
     <script src="script.js"></script>
-
+    <h3>Reference</h3>
+    <p>[1] Angel Chang, Angela Dai, Thomas Funkhouser, Maciej Halber, Matthias Niessner, Manolis Savva, Shuran Song, Andy Zeng, and Yinda Zhang. Matterport3d: Learning from rgb-d data in indoor environments. International Conference on 3D Vision (3DV), 2017.</p>
     <section id="contact">
         <h3>Contact</h3>
-        <p>Please contact us at thubimnet@outlook.com if you have any questions.</p>
-        <p>Copyright © CBIMS Research Group. All rights reserved.</p> 
+        <p>Please contact us at <span style="color: blueviolet;">thubimnet@outlook.com</span> if you have any questions.</p>
     </section>
+
+    <h3>License</h3>
+    <p>The original data from Matterport3D dataset is released under <a href="https://kaldir.vc.in.tum.de/matterport/MP_TOS.pdf">Terms of Use</a> agreement. The part of our datset is under <a href="https://raw.githubusercontent.com/vsislab/Matterport3D-Layout/master/LICENSE.txt">MIT Liscence</a>.</p>
+    <p style="text-align: center;">Copyright © CBIMS Research Group. All rights reserved.</p> 
 </body>
 </html>
 

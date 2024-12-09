@@ -26,25 +26,25 @@ header h2 {
     font-weight: normal;
 }
 
-#abstract {
-    text-align: center;
+h3 {
+    margin: 20px;
+    margin-left: 0;
+    margin-top: 40px;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+p {
+    font-size: 1.1em;
+    line-height: 1.4;
 }
 
 #abstract p {
     display: inline-block; /* 使段落成为行内块元素 */
-    /* width: 60%; 设置文本的宽度 */
     margin: 0 auto; /* 自动设置左右边距以居中 */
     text-align: justify;
-    /* text-indent:2em; */
 }
 
-#contact {
-    text-align: center;
-}
-
-#resources h3 {
-    text-align: center;
-} 
 
 
 
@@ -63,9 +63,6 @@ header h2 {
     height: 35px;
 }
 
-#viewer{
-    text-align: center;
-}
 #viewer p{
     display: inline-block; /* 使段落成为行内块元素 */
     /* width: 60%;  */
