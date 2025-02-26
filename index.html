@@ -3,46 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BIMNet</title>
+    <link rel="icon" href="image/icon.png" type="image/icon">
+    <title>BIMNet: Dataset and benchmark for as-built BIM reconstruction from real-world point cloud</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <header>
-        <h1>BIMNet: Dataset and benchmark for as-built BIM reconstruction from real-world point cloud</h1>
-        <br>
-        <br>
-        <h2>CBIMS research group, School of software, Tsinghua University</h2>
-    </header>
-    <br>
-    <div style="display: flex; justify-content: center;">   
-    <img src="image/figure.jpg" style="width: 100%; height: 100%; ">
+    <script src="script.js"></script>
+    <div style="max-width: 1000px; flex-direction: column; align-items: center; justify-content: center; display: flex;">
+        <header>
+            <h1><img src="image/icon.png" style="width: 40px; height: 40px; margin-right: -3px;margin-bottom: -3px;">
+                <b>BIMNet:</b> Dataset and benchmark for as-built BIM reconstruction from real-world point cloud</h1>
+            
+            <p id="accept">Automation in Construction, 2025</p>
+            <section id="authors">
+                <span class="name">Yudong Liu</span>, 
+                <a class="name" href="https://github.com/alvin528">Han Huang</a>,
+                <span class="name">Ge Gao<sup>&#x2709;</sup></span>, 
+                <span class="name">Ziyi Ke</span>,
+                <span class="name" href="https://github.com/list17">Shengtao Li</span>,
+                <span class="name">Ming Gu</span> 
+            </section>
+            <br>
+            <h2>School of software, Tsinghua University</h2>
+            <p><sup>&#x2709;</sup>Corresponding Author</p>
+        </header>
+    
+        <div style="display: flex; justify-content: center;">
+        <img src="image/figure.jpg" style="width: 90%; padding-bottom: 30px;">
+        </div>
     </div>
-    <section id="abstract">
-        <h3>Abstract</h3>
-        <p>Building Information Modeling (BIM) contains extensive geometric and semantic information, serving as an essential bridge between the real and digital worlds. Currently, scan-to-BIM is widely applied in practical engineering projects for as-built BIM reconstruction. Developments in automation methods have reduced the difficulty of scan-to-BIM, significantly improving reconstruction efficiency and saving in labor and costs. However, due to the lack of unified datasets and benchmarks, these methods focus on optimizing different metrics within their respective datasets. Since mainstream approaches have begun to embrace deep learning, these scattered datasets fail to meet the requirements for complex architectural data comprehension. The absence of standardized evaluation metrics also hinders the comparison between methods, thereby impeding progress in the field. To address data issues and standardize the scan-to-BIM benchmark, we propose BIMNet for as-built BIM reconstruction. Our BIMNet comprises 25 high-quality scans from various building types, along with corresponding IFC-based point cloud semantics and BIM models. We have also designed geometric metrics to evaluate the geometric accuracy of reconstruction models at the component level and topological metrics to assess the spatial connectivity correctness of these models. Experimental results demonstrate that the BIMNet dataset serves as a valuable benchmark for evaluating existing methods. Our IFC-based semantic design and refinement assist deep learning-based point cloud semantic segmentation algorithms in learning AEC (Architecture, Engineering, and Construction) domain-specific knowledge. Furthermore, our geometric and topological metrics not only quantify the reconstruction quality from different perspectives but also help accurately identify issues in individual components and spatial connectivity through visualization.</p>
-    </section>
 
 
-    <section id="resources">
-        <!-- <h3>Paper (Coming Soon)</h3> -->
-        <h3>Dataset and Code (Coming Soon)</h3>
-        <p>Please check the <a href="">git repository</a> for a detailed introduction to the BIMNet dataset, benchmark and related tools.</p>
-    </section>
+    <div id="abstract" style="width: 100%;">
+        <div style="max-width: 800px; margin: auto; ">
+            <h3>Abstract</h3>
+            <p style="padding: 40px; padding-top: 0;">As-built BIM reconstruction plays a significant role in urban renewal and building digitization but currently faces challenges of low efficiency. Scan-to-BIM aims to improve reconstruction efficiency but lacks domain-specific, large-scale datasets and accurate, multi-dimensional benchmark metrics. These deficiencies further impede the evaluation and training of scan-to-BIM methods. <br> To address these challenges, this paper proposes BIMNet, an IFC-based large-scale point cloud to BIM dataset, and a set of metrics that reflect the quality and issues of reconstructed models from both geometric and topological perspectives. Experiments demonstrate that BIMNet enhances the evaluation and training of scan-to-BIM methods during the critical processes of reconstruction and segmentation. This research contributes to the data foundation and metric system for deep-learning based scan-to-BIM methods. In the future, BIMNet will not only facilitate the development of scan-to-BIM but also contribute to the advancement of smart cities and AI-driven technologies beyond scan-to-BIM.</p>
+        </div>
+    </div>
 
-    <section id="viewer">
-        <h3>Interactive viewer</h3>
-        <p>We provide three interactive BIMNet data instances here. You can use two sliders to view data from the three modalities. For better visualization, we have removed the roof of the BIM model.</p>
-        <p>If the positions of the three modalities are not synchronized or if there is any lag, it may be because the instances have not fully loaded yet (~60MB for each instance). Please wait for a while and then switch between the instance tabs, which will prompt the synchronization of the different modalities.</p>
-    </section>
-    <br>
 
+    <!-- <div>
+        <section id="resources">
+            <h3>Paper (Coming Soon)</h3>
+            <h3>Dataset and Code (Coming Soon)</h3>
+            <p>Please check the <a href="">git repository</a> for a detailed introduction to the BIMNet dataset, benchmark and related tools.</p>
+        </section>
+    </div> -->
+
+
+    <h3>Data preview</h3>
     <div id="tabs">
         <button class="tab-button" data-tab="instance1">Instance 1</button>
         <button class="tab-button" data-tab="instance2">Instance 2</button>
         <button class="tab-button" data-tab="instance3">Instance 3</button>
     </div>
 
-    <div style="display: flex; justify-content: center;">
+    <div style="display: flex; justify-content: center; width:80%;">
         <div id="video-compare-container">
             <div class="video-container" id="video-container1">
                 <video muted autoplay="autoplay" loop="loop" id="video1">
@@ -64,23 +81,46 @@
         </div>
     </div>
 
-    <div style="display: flex; width: 100%; justify-content: center; text-align: center;">
+    <div style="display: flex; width: 60%; justify-content: center; text-align: center;">
         <p class='captions' style="width: 25%;">Real-world point cloud</p>
         <p class='captions' style="width: 25%;">IFC-based semantics</p>
         <p class='captions' style="width: 25%;">Dedicated BIM model</p>
     </div>
 
-    <script src="script.js"></script>
-    <h3>Reference</h3>
-    <p>[1] Angel Chang, Angela Dai, Thomas Funkhouser, Maciej Halber, Matthias Niessner, Manolis Savva, Shuran Song, Andy Zeng, and Yinda Zhang. Matterport3d: Learning from rgb-d data in indoor environments. International Conference on 3D Vision (3DV), 2017.</p>
-    <section id="contact">
-        <h3>Contact</h3>
-        <p>Please contact us at <span style="color: blueviolet;">thubimnet@outlook.com</span> if you have any questions.</p>
-    </section>
+    <div id="abstract" style="width: 100%; background-color: white;">
+        <div style="max-width: 800px; margin: auto; ">
+            <p style="padding: 40px; padding-top: 0; padding-bottom: 0;text-align: justify;">Slide to view the data from three modalities. </p>
+            <p style="padding: 40px; padding-top: 0; text-align: justify;"> If the positions of the three modalities are not synchronized, it may be because the instances have not fully loaded yet (~60MB for each instance). Please wait for a while and then switch between the instance tabs, which will prompt the synchronization of the different modalities.</p>
+        </div>
+    </div>
 
-    <h3>License</h3>
-    <p>The original data from Matterport3D dataset is released under <a href="https://kaldir.vc.in.tum.de/matterport/MP_TOS.pdf">Terms of Use</a> agreement. The part of our datset is under <a href="https://raw.githubusercontent.com/vsislab/Matterport3D-Layout/master/LICENSE.txt">MIT Liscence</a>.</p>
-    <p style="text-align: center;">Copyright © CBIMS Research Group. All rights reserved.</p> 
+
+    <div id="abstract" style="width: 100%;">
+        <div style="max-width: 800px; margin: auto; ">
+            <h3>Reference</h3>
+            <p style="padding: 40px; padding-top: 0;">[1] Angel Chang, Angela Dai, Thomas Funkhouser, Maciej Halber, Matthias Niessner, Manolis Savva, Shuran Song, Andy Zeng, and Yinda Zhang. Matterport3d: Learning from rgb-d data in indoor environments. International Conference on 3D Vision (3DV), 2017.</p>
+        </div>
+    </div>
+
+    <div id="abstract" style="width: 100%;background-color: white;">
+        <div style="max-width: 800px; margin: auto; ">
+            <h3>License</h3>
+            <p style="padding: 40px; padding-top: 0;">The original data from Matterport3D dataset is released under <a href="https://kaldir.vc.in.tum.de/matterport/MP_TOS.pdf">Terms of Use</a> agreement. The part of our datset is under <a href="https://raw.githubusercontent.com/vsislab/Matterport3D-Layout/master/LICENSE.txt">MIT Liscence</a>.</p>
+        </div>
+    </div>
+
+    <div id="abstract" style="width: 100%; ">
+        <div style="max-width: 800px; margin: auto; ">
+            <h3>Contact</h3>
+            <p style="padding: 40px; padding-top: 0;">Please contact us at <span style="color: blueviolet;">thubimnet@outlook.com</span> if you have any questions.</p>
+        </div>
+    </div>
+    <!-- <div style="max-width: 300px;">
+        <script type="text/javascript" id="mapmyvisitors" src="//mapmyvisitors.com/map.js?d=uPI5i63cJFOi0hXtDmAB4dijakaZrQHJHbIjjlYwC-g&cl=ffffff&w=a"></script>
+    </div> -->
+    <script type="text/javascript" id="mapmyvisitors" src="//mapmyvisitors.com/map.js?d=uPI5i63cJFOi0hXtDmAB4dijakaZrQHJHbIjjlYwC-g&cl=ffffff&w=a"></script>
+    <p style="margin-bottom:0;">Webpage adapted from <a href="https://wuzirui.github.io/gs-ssr/">GS-SSR</a>.</p>
+    <p style="margin-bottom:50px;">Copyright © CBIMS Research Group. All rights reserved.</p> 
 </body>
 </html>
 
