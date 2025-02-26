@@ -80,10 +80,11 @@ p {
 }
 .name {
     color: #485fc7; /* 默认颜色 */
-    text-decoration: none; /* 去掉下划线 */
+    text-decoration: none;
 }
 .name:hover {
     color: black; /* 悬浮时的颜色 */
+    text-decoration: underline; /* 添加下划线 */
 }
 
 #accept{
