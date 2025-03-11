@@ -87,6 +87,22 @@ p {
     text-decoration: underline; /* 添加下划线 */
 }
 
+.button {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 20px;
+    margin: 5px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    text-decoration: none;
+    font-size: 16px;
+}
+.button i {
+    margin-right: 8px;
+}
+
 #accept{
     font-size: 20px;
     color:#999999;
