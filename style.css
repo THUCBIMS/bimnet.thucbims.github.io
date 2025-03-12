@@ -87,6 +87,20 @@ p {
     text-decoration: underline; /* 添加下划线 */
 }
 
+.citation-text {
+    font-family: 'Courier New', Courier, monospace;
+    margin: 50px;
+    padding:20px;
+    margin-top: 30px;
+    white-space: pre-wrap;
+    color: #333;
+    text-align: left;
+    max-width: 800px;
+    display: inline-block;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
 .button {
     display: inline-flex;
     align-items: center;
