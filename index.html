@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="image/icon.png" type="image/icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <title>BIMNet: Dataset and benchmark for as-built BIM reconstruction from real-world point cloud</title>
+    <!-- <title>BIMNet: Dataset and benchmark for as-built BIM reconstruction from real-world point cloud</title>
+      -->
+    <title>BIMNet: An openBIM-based dataset and benchmark for scan-to-BIM</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -13,10 +15,11 @@
     <script src="script.js"></script>
     <div style="max-width: 1000px; flex-direction: column; align-items: center; justify-content: center; display: flex;">
         <header>
-            <h1><img src="image/icon.png" style="width: 40px; height: 40px; margin-right: -3px;margin-bottom: -3px;">
-                <b>BIMNet:</b> Dataset and benchmark for as-built BIM reconstruction from real-world point cloud</h1>
-            
-            <p id="accept">Automation in Construction, 2025</p>
+            <!-- <h1><img src="image/icon.png" style="width: 40px; height: 40px; margin-right: -3px;margin-bottom: -3px;">
+                <b>BIMNet:</b> Dataset and benchmark for as-built BIM reconstruction from real-world point cloud</h1> -->
+                        <h1><img src="image/icon.png" style="width: 40px; height: 40px; margin-right: -3px;margin-bottom: -3px;">
+                <b>BIMNet:</b> An openBIM-based dataset and benchmark for scan-to-BIM</h1>
+            <!-- <p id="accept">Automation in Construction, 2025</p> -->
             <section id="authors">
                 <a class="name">Yudong Liu</a>, 
                 <a class="name" href="https://github.com/alvin528">Han Huang</a>,
@@ -52,10 +55,20 @@
     <div id="abstract" style="width: 100%;">
         <div style="max-width: 800px; margin: auto; ">
             <h3>Abstract</h3>
-            <p style="padding: 40px; padding-top: 0;">As-built BIM reconstruction plays a significant role in urban renewal and building digitization but currently faces challenges of low efficiency. Scan-to-BIM aims to improve reconstruction efficiency but lacks domain-specific, large-scale datasets and accurate, multi-dimensional benchmark metrics. These deficiencies further impede the evaluation and training of scan-to-BIM methods. <br> To address these challenges, this paper proposes BIMNet, an IFC-based large-scale point cloud to BIM dataset, and a set of metrics that reflect the quality and issues of reconstructed models from both geometric and topological perspectives. Experiments demonstrate that BIMNet enhances the evaluation and training of scan-to-BIM methods during the critical processes of reconstruction and segmentation. This research contributes to the data foundation and metric system for deep-learning based scan-to-BIM methods. In the future, BIMNet will not only facilitate the development of scan-to-BIM but also contribute to the advancement of smart cities and AI-driven technologies beyond scan-to-BIM.</p>
+                <div style="display: flex; justify-content: center;">
+                    <video id="main-video" controls>
+                        <source src="video/main_video.mp4">
+                    </video>
+                </div>
+            <br>
+            <br>
+            <!-- <p style="padding: 40px; padding-top: 0;">As-built BIM reconstruction plays a significant role in urban renewal and building digitization but currently faces challenges of low efficiency. Scan-to-BIM aims to improve reconstruction efficiency but lacks domain-specific, large-scale datasets and accurate, multi-dimensional benchmark metrics. These deficiencies further impede the evaluation and training of scan-to-BIM methods. <br> To address these challenges, this paper proposes BIMNet, an IFC-based large-scale point cloud to BIM dataset, and a set of metrics that reflect the quality and issues of reconstructed models from both geometric and topological perspectives. Experiments demonstrate that BIMNet enhances the evaluation and training of scan-to-BIM methods during the critical processes of reconstruction and segmentation. This research contributes to the data foundation and metric system for deep-learning based scan-to-BIM methods. In the future, BIMNet will not only facilitate the development of scan-to-BIM but also contribute to the advancement of smart cities and AI-driven technologies beyond scan-to-BIM.</p> -->
+            <p style="padding: 40px; padding-top: 0;">Nowadays, AI and deep learning algorithms are data-hungry, with datasets like ImageNet and ScanNet driving advancements in 2D and 3D computer vision. These open-source datasets facilitate algorithm benchmarking, collaboration, and lower entry barriers, significantly benefiting the CV(Computer Vision) community. In the AEC(Architecture, Engineering&Construction) industry, the demand for urban renewal and building digitization has made as-built BIM reconstruction a key research area. Scan-to-BIM methods increasingly use AI for enhanced performance. However, unlike CV, the scan-to-BIM field lacks large-scale, domain-specific datasets and robust benchmarks, hindering the development and evaluation of AI-driven algorithms. </p>
+            <p style="padding: 40px; padding-top: 0;">Leveraging the open-source foundation, technical maturity, and standardized workflows offered by <b>openBIM</b>, we present <b>BIMNet</b>—a large-scale, domain-specific scan-to-BIM dataset and evaluation benchmark built upon IFC standards—to bridge the existing gap in the field. In total, BIMNet contains over 116.5 million points collected from 25 real-world scans, each including its corresponding IFC model. BIMNet spans more than 8,700 square meters across 382 rooms. It offers rich semantic and structural information essential for scan-to-BIM research. </p>
+            <p style="padding: 40px; padding-top: 0;">Specifically, our research contributions include: (1) To the best of our knowledge, we proposed the first openBIM-based standard workflow for scan-to-BIM, with domain-specific dataset and benchmark, plug-in AI-based algorithms and standard IFC output.  (2) We created an openBIM-based domain-specific dataset, with IFC-based semantic label system design and manually modeled IFC models under IDM requirements. (3) We developed a multi-dimensional evaluation framework based on IFC, in order to evaluate the geometric and topological accuracy of the reconstructed model, thereby reflecting the effectiveness of scan-to-BIM algorithms. </p>
+            <p style="padding: 40px; padding-top: 0;">Aligned with openBIM principles, BIMNet emphasizes interoperability, openness, and collaboration. Through deep integration with openBIM and its toolsets, BIMNet not only provides a foundational resource for researchers to design and test scan-to-BIM methodologies but also facilitates stakeholders in comparing and selecting suitable scan-to-BIM algorithms. This integration leverages the interoperability and flexibility of openBIM standards, enhancing collaboration and innovation in the field. With strong community support, we envision BIMNet driving the AEC industry toward an AI-driven future through its scale, quality, and domain specificity.</p>
         </div>
     </div>
-
 
 
 
@@ -101,7 +114,27 @@
         </div>
     </div>
 
-    <div id="abstract" style="width: 100%;">
+
+
+    <div id="abstract" style="width: 100%; ">
+        <div style="max-width: 800px; margin: auto; ">
+            <h3>Process map</h3>
+            <img src="image/pm.jpg" style="width: 100%; padding-bottom: 30px;">
+            <p style="padding: 40px; padding-top: 0;">Our openBIM-based BIMNet dataset and benchmark are constructed through stages 1 and 2. Stage 3 demonstrates the IFC-based scan-to-BIM benchmark design. Stage 4 involves real-world applications and analysis using the data from BIMNet.</p>
+        </div>
+    </div>
+
+    <div id="abstract" style="width: 100%; background-color: white;">
+        <div style="max-width: 800px; margin: auto; ">
+            <h3>Software ecosystem</h3>
+            <img src="image/ecosys.png" style="width: 100%; padding-bottom: 30px;">
+            <p style="padding: 40px; padding-top: 0;">Our openBIM-based scan-to-BIM workflow provides a platform for training and evaluating plug-in AI-based scan-to-BIM algorithms, accepting diverse point cloud sources to output versatile as-built BIMs.</p>
+        </div>
+    </div>
+
+
+
+    <div id="abstract" style="width: 100%; ">
         <div style="max-width: 800px; margin: auto; ">
             <h3>Dataset Download</h3>
             <p style="padding: 40px; padding-top: 0;">You should first request access to <a href="https://niessner.github.io/Matterport/">Matterport3D dataset</a> as our dataset is based on Matterport3D. Please fill and sign the <a href="https://kaldir.vc.in.tum.de/matterport/MP_TOS.pdf">Terms of Use</a> agreement form and send it to <span style="color: blueviolet;">matterport3d@googlegroups.com</span> to request access to Matterport3D dataset.<br>If your request is approved, please send their reply email to us at <span style="color: blueviolet;">thubimnet@outlook.com</span> to get access to our dataset.</p>
