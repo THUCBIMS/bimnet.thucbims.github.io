@@ -14,6 +14,65 @@ document.addEventListener('DOMContentLoaded', function() {
     };
 
     const tabButtons = document.querySelectorAll('.tab-button');
+    const videoStatus = document.getElementById('video-status');
+    let loadController;
+    let videoUrls = [];
+
+    async function loadVideos(targetId) {
+        if (loadController) loadController.abort();
+        loadController = new AbortController();
+        const controller = loadController;
+        const signal = controller.signal;
+
+        videoContainers.forEach(video => {
+            video.pause();
+            video.removeAttribute('src');
+            video.load();
+        });
+        videoUrls.forEach(url => URL.revokeObjectURL(url));
+        videoUrls = [];
+        videoStatus.hidden = false;
+        videoStatus.textContent = 'Loading all three videos before synchronized playback…';
+
+        try {
+            // Download complete files so a slower connection cannot start one video early.
+            const blobs = await Promise.all(videoSources[targetId].map(async source => {
+                const response = await fetch(source, { signal });
+                if (!response.ok) throw new Error('Video download failed');
+                return response.blob();
+            }));
+            if (signal.aborted) return;
+
+            videoUrls = blobs.map(blob => URL.createObjectURL(blob));
+            await Promise.all(videoContainers.map((video, index) => new Promise((resolve, reject) => {
+                video.addEventListener('canplay', resolve, { once: true, signal });
+                video.addEventListener('error', () => reject(new Error('Video could not be decoded')), { once: true, signal });
+                signal.addEventListener('abort', () => reject(signal.reason), { once: true });
+                video.src = videoUrls[index];
+                video.load();
+            })));
+            if (signal.aborted) return;
+
+            videoContainers.forEach(video => { video.currentTime = 0; });
+            await Promise.all(videoContainers.map(video => video.play()));
+            if (!signal.aborted) videoStatus.hidden = true;
+        } catch (error) {
+            if (signal.aborted) return;
+            controller.abort();
+            videoContainers.forEach(video => video.pause());
+            videoStatus.textContent = 'Unable to play the videos. Select an instance to retry.';
+        }
+    }
+
+    // Keep the other modalities aligned with the first video, including after looping.
+    videoContainers[0].addEventListener('timeupdate', function() {
+        if (this.paused) return;
+        videoContainers.slice(1).forEach(video => {
+            if (Math.abs(video.currentTime - this.currentTime) > 0.1) {
+                video.currentTime = this.currentTime;
+            }
+        });
+    });
 
     tabButtons.forEach(button => {
         button.addEventListener('click', function() {
@@ -26,29 +85,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Add active class to the clicked button
             this.classList.add('active');
-            
-
-            // Update video sources
-            videoContainers.forEach((video, index) => {
-                video.pause();
-                video.querySelector('source').src = videoSources[targetId][index];
-                video.load();
-                video.play();
-
-                // video.loadedmetadata = function() {
-                //     loadedCount++;
-                //     console.log(loadedCount);
-                //     if (loadedCount === videoContainers.length) {
-                //         setTimeout(() => {
-                //             videoContainers.forEach(v => v.play());
-                //         }, 1000); // Adjust the delay time as needed
-                //         // videoContainers.forEach(v => v.play());
-                //     }
-                // };
-
-            });
-
-            
+            loadVideos(targetId);
         });
     });
 

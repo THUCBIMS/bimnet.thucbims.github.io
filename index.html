@@ -92,19 +92,13 @@
     <div style="display: flex; justify-content: center; width:80%;">
         <div id="video-compare-container">
             <div class="video-container" id="video-container1">
-                <video muted autoplay="autoplay" loop="loop" id="video1">
-                    <source src="video/1-3.mp4">
-                </video>
+                <video muted playsinline loop="loop" id="video1"></video>
             </div>
             <div class="video-container" id="video-container2">
-                <video muted autoplay="autoplay" loop="loop" id="video2">
-                    <source src="video/1-2.mp4">
-                </video>
+                <video muted playsinline loop="loop" id="video2"></video>
             </div>
             <div class="video-container" id="video-container3">
-                <video muted autoplay="autoplay" loop="loop" id="video3">
-                    <source src="video/1-1.mp4">
-                </video>
+                <video muted playsinline loop="loop" id="video3"></video>
             </div>
             <div class="slider" id="slider1"></div>
             <div class="slider" id="slider2"></div>
@@ -120,7 +114,7 @@
     <div id="abstract" style="width: 100%; background-color: white;">
         <div style="max-width: 800px; margin: auto; ">
             <p style="padding: 40px; padding-top: 0; padding-bottom: 0;text-align: justify;">Slide to view the data from three modalities. </p>
-            <p style="padding: 40px; padding-top: 0; text-align: justify;"> If the positions of the three modalities are not synchronized, it may be because the instances have not fully loaded yet (~60MB for each instance). Please wait for a while and then switch between the instance tabs, which will prompt the synchronization of the different modalities.</p>
+            <div id="video-status" role="status" style="padding: 40px; padding-top: 0; text-align: justify;">Loading all three videos before synchronized playback…</div>
         </div>
     </div>
 
