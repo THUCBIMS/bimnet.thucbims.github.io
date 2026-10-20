@@ -15,6 +15,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const tabButtons = document.querySelectorAll('.tab-button');
     const videoStatus = document.getElementById('video-status');
+    const videoStatusText = document.getElementById('video-status-text');
+    const videoProgress = document.getElementById('video-progress');
+    const videoProgressLabel = document.getElementById('video-progress-label');
     let loadController;
     let videoUrls = [];
 
@@ -32,16 +35,49 @@ document.addEventListener('DOMContentLoaded', function() {
         videoUrls.forEach(url => URL.revokeObjectURL(url));
         videoUrls = [];
         videoStatus.hidden = false;
-        videoStatus.textContent = 'Loading all three videos before synchronized playback…';
+        videoStatusText.textContent = 'Loading previews';
+        videoProgress.hidden = false;
+        videoProgress.value = 0;
+        videoProgressLabel.textContent = '0%';
+        const receivedBytes = [0, 0, 0];
+        const totalBytes = [0, 0, 0];
+
+        function updateProgress() {
+            if (signal.aborted) return;
+            if (totalBytes.every(total => total > 0)) {
+                const total = totalBytes.reduce((sum, size) => sum + size, 0);
+                const received = receivedBytes.reduce((sum, size) => sum + size, 0);
+                const percent = Math.min(100, Math.floor(received / total * 100));
+                videoProgress.value = percent;
+                videoProgressLabel.textContent = `${percent}%`;
+            } else {
+                videoProgress.removeAttribute('value');
+                videoProgressLabel.textContent = 'Downloading…';
+            }
+        }
 
         try {
             // Download complete files so a slower connection cannot start one video early.
-            const blobs = await Promise.all(videoSources[targetId].map(async source => {
+            const blobs = await Promise.all(videoSources[targetId].map(async (source, index) => {
                 const response = await fetch(source, { signal });
                 if (!response.ok) throw new Error('Video download failed');
-                return response.blob();
+                totalBytes[index] = Number(response.headers.get('Content-Length'));
+                updateProgress();
+                const reader = response.body.getReader();
+                const chunks = [];
+                while (true) {
+                    const { done, value } = await reader.read();
+                    if (done) break;
+                    chunks.push(value);
+                    receivedBytes[index] += value.byteLength;
+                    updateProgress();
+                }
+                return new Blob(chunks, { type: response.headers.get('Content-Type') || 'video/mp4' });
             }));
             if (signal.aborted) return;
+            videoProgress.value = 100;
+            videoProgressLabel.textContent = '100%';
+            videoStatusText.textContent = 'Preparing synchronized playback…';
 
             videoUrls = blobs.map(blob => URL.createObjectURL(blob));
             await Promise.all(videoContainers.map((video, index) => new Promise((resolve, reject) => {
@@ -60,7 +96,9 @@ document.addEventListener('DOMContentLoaded', function() {
             if (signal.aborted) return;
             controller.abort();
             videoContainers.forEach(video => video.pause());
-            videoStatus.textContent = 'Unable to play the videos. Select an instance to retry.';
+            videoStatusText.textContent = 'Unable to load previews';
+            videoProgress.hidden = true;
+            videoProgressLabel.textContent = 'Select an instance to retry.';
         }
     }
 

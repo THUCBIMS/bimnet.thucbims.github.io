@@ -102,6 +102,13 @@
             </div>
             <div class="slider" id="slider1"></div>
             <div class="slider" id="slider2"></div>
+            <div id="video-status" role="status" aria-live="polite">
+                <div class="video-loading-content">
+                    <span id="video-status-text">Loading previews</span>
+                    <progress id="video-progress" max="100" value="0" aria-label="Video download progress"></progress>
+                    <span id="video-progress-label" aria-hidden="true">0%</span>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -111,10 +118,9 @@
         <p class='captions' style="width: 25%;">Dedicated BIM model</p>
     </div>
 
-    <div id="abstract" style="width: 100%; background-color: white;">
+    <div id="data-preview-instruction">
         <div style="max-width: 800px; margin: auto; ">
-            <p style="padding: 40px; padding-top: 0; padding-bottom: 0;text-align: justify;">Slide to view the data from three modalities. </p>
-            <div id="video-status" role="status" style="padding: 40px; padding-top: 0; text-align: justify;">Loading all three videos before synchronized playback…</div>
+            <p>Slide to view the data from three modalities.</p>
         </div>
     </div>
 
